@@ -1,8 +1,8 @@
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
 
 const path = require('path');
-const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 
+const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const isProduction = process.env.NODE_ENV == 'production';
 
 const config = {
@@ -30,6 +30,7 @@ const config = {
     ],
   },
   target: 'node',
+  externals: { express: 'commonjs express' },
 };
 
 module.exports = () => {
