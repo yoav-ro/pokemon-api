@@ -1,0 +1,1 @@
+(()=>{var e={147:e=>{"use strict";e.exports=require("fs")},17:e=>{"use strict";e.exports=require("path")}},r={};function o(t){var s=r[t];if(void 0!==s)return s.exports;var l=r[t]={exports:{}};return e[t](l,l.exports,o),l.exports}(()=>{o(147);const e=o(17);console.log("Hello World!"),console.log(e.basename("C:\\temp\\myfile.html"))})()})();
