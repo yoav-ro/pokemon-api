@@ -34,7 +34,6 @@ router.put('/catch/:id', (request, response, next) => {
     const username = request.headers.username;
     const pokemonObject = request.body.pokemon;
     const pokemonId = request.params.id;
-    console.log(pokemonObject);
     if (fileHelper.pokemonExists(username, pokemonId)) {
       throw errorCodes.pokemonExists;
     } else {
