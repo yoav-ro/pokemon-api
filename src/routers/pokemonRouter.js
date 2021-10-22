@@ -40,7 +40,6 @@ router.put('/catch/:id', (request, response, next) => {
       fileHelper.savePokemon(username, pokemonId, pokemonObject);
       response.json({ message: 'Pokemon added to collection' });
     }
-    response.json(pokemon);
   } catch (error) {
     throwCallbackError(error, next);
   }
