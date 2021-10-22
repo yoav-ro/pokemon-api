@@ -18,7 +18,6 @@ function errorHandler(err, request, response, next) {
         .json({ message: "Can't delete pokemon because it does not exist" });
       break;
     default:
-      console.log(err);
       response
         .status(500)
         .json({ message: 'An internal server error has occured' });

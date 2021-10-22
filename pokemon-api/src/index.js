@@ -4,8 +4,12 @@ const pokemonRouter = require('./routers/pokemonRouter');
 const userRouter = require('.//routers/userRouter');
 const errorHandler = require('./middleware/errorHandler');
 const userHandler = require('./middleware/userHandler');
+const fileHelper = require('./fileHelper/fileHelpers');
 const server = express();
 const port = 8080;
+
+//Create users dir if it does not exist
+fileHelper.createUsersDir();
 
 server.use(cors());
 server.use(express.json());

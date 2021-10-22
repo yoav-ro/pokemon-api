@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const webpack = false;
+const webpack = require('../constants/webpack');
 
 function userExists(username) {
   try {
@@ -32,9 +32,35 @@ function deletePokemon(username, pokemonId) {
   fs.unlinkSync(pokePath);
 }
 
+function getAllPokemon(username) {
+  const pokePath = getUserPath(username);
+  const pokemon = [];
+  const files = fs.readdirSync(pokePath);
+  files.forEach((pokemonJSON) => {
+    const jsonPath = path.resolve(pokePath, pokemonJSON);
+    console.log(jsonPath);
+    pokemon.push(getObjectFromJSON(jsonPath));
+  });
+  return pokemon;
+}
+
+function getObjectFromJSON(path) {
+  const data = fs.readFileSync(path, 'utf8');
+  return JSON.parse(data);
+}
+
 function getUserPath(username) {
   if (webpack) return path.resolve(__dirname, `./users/${username}/`);
   else return path.resolve(__dirname, `../users/${username}/`);
+}
+
+function createUsersDir() {
+  let dir;
+  if (webpack) dir = path.resolve(__dirname, `./users`);
+  else dir = path.resolve(__dirname, `../users`);
+  console.log(__dirname);
+  console.log(dir);
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir);
 }
 
 module.exports = {
@@ -43,4 +69,6 @@ module.exports = {
   pokemonExists,
   savePokemon,
   deletePokemon,
+  getAllPokemon,
+  createUsersDir,
 };

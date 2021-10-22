@@ -1,3 +1,4 @@
+const { request, response } = require('express');
 const express = require('express');
 const Pokedex = require('pokedex-promise-v2');
 const errorCodes = require('../constants/errorCodes');
@@ -56,6 +57,16 @@ router.delete('/release/:id', (request, response, next) => {
       fileHelper.deletePokemon(username, id);
       response.json({ message: 'Pokemon removed from collection' });
     }
+  } catch (error) {
+    throwCallbackError(error, next);
+  }
+});
+
+router.get('/', (request, response, next) => {
+  try {
+    const username = request.headers.username;
+    const pokemons = fileHelper.getAllPokemon(username);
+    response.json(pokemons);
   } catch (error) {
     throwCallbackError(error, next);
   }
