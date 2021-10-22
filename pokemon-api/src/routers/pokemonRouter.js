@@ -5,16 +5,14 @@ const errorCodes = require('../constants/errorCodes');
 const router = express.Router();
 const P = new Pokedex();
 
-
 router.get('/get/:id', async (request, response, next) => {
   try {
     const pokemonID = request.params.id;
     const pokemonData = await getPokemonData(pokemonID);
     response.json(pokemonData);
   } catch (error) {
-    console.log("Couldnt get pokemon by id");
-    console.log(errorCodes.pokemonIdNotFound);
-    throwCallbackError(errorCodes.pokemonIdNotFound, next)
+    console.log('Couldnt get pokemon by id');
+    throwCallbackError(errorCodes.pokemonIdNotFound, next);
   }
 });
 
@@ -24,8 +22,8 @@ router.get('/query', async (request, response, next) => {
     const pokemonData = await getPokemonData(pokemonName);
     response.json(pokemonData);
   } catch (error) {
-    console.log("Couldn't get pokemon by name");
-    throwCallbackError(errorCodes.pokemonNameNotFound, next)
+    console.log("Couldn't get pokemon by name"); //Using double ticks because of ' in couldn't
+    throwCallbackError(errorCodes.pokemonNameNotFound, next);
   }
 });
 
@@ -57,21 +55,21 @@ function getTypes(types) {
   return newTypes;
 }
 
-function getAbilities(abilities){
-    const newAbilities = [];
-    abilities.forEach(abil => {
-        newAbilities.push(abil.ability.name);
-    })
-    return newAbilities;
+function getAbilities(abilities) {
+  const newAbilities = [];
+  abilities.forEach((abil) => {
+    newAbilities.push(abil.ability.name);
+  });
+  return newAbilities;
 }
 
 //Throw callback error so it can be caught by express
-function throwCallbackError(error, next){
-    try{
-        throw new Error(error);
-    }catch(err){
-        next(err);
-    }
+function throwCallbackError(error, next) {
+  try {
+    throw new Error(error);
+  } catch (err) {
+    next(err);
+  }
 }
 
 module.exports = router;
