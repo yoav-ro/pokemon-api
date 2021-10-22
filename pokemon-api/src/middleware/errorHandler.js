@@ -11,7 +11,12 @@ function errorHandler(err, request, response, next) {
     case errorCodes.usernameHeaderMissing:
       response.status(401).json({ message: 'Username header not found' });
     case errorCodes.pokemonExists:
-      response.status(403).json({ message: 'Pokemon exists' });
+      response.status(403).json({ message: 'Pokemon already exists' });
+    case errorCodes.pokemonDoesNotExist:
+      response
+        .status(403)
+        .json({ message: "Can't delete pokemon because it does not exist" });
+      break;
     default:
       console.log(err);
       response

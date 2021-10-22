@@ -27,9 +27,20 @@ function savePokemon(username, pokemonId, pokemonObject) {
   fs.writeFile(pokePath, JSON.stringify(pokemonObject), function (err) {});
 }
 
+function deletePokemon(username, pokemonId) {
+  const pokePath = path.resolve(getUserPath(username), `${pokemonId}.json`);
+  fs.unlinkSync(pokePath);
+}
+
 function getUserPath(username) {
   if (webpack) return path.resolve(__dirname, `./users/${username}/`);
   else return path.resolve(__dirname, `../users/${username}/`);
 }
 
-module.exports = { createUserFile, userExists, pokemonExists, savePokemon };
+module.exports = {
+  createUserFile,
+  userExists,
+  pokemonExists,
+  savePokemon,
+  deletePokemon,
+};

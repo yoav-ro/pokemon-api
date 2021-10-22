@@ -46,6 +46,21 @@ router.put('/catch/:id', (request, response, next) => {
   }
 });
 
+router.delete('/release/:id', (request, response, next) => {
+  try {
+    const username = request.headers.username;
+    const id = request.params.id;
+    if (!fileHelper.pokemonExists(username, id)) {
+      throw errorCodes.pokemonDoesNotExist;
+    } else {
+      fileHelper.deletePokemon(username, id);
+      response.json({ message: 'Pokemon removed from collection' });
+    }
+  } catch (error) {
+    throwCallbackError(error, next);
+  }
+});
+
 async function getPokemonData(query) {
   return new Promise(async (resolve, reject) => {
     try {
