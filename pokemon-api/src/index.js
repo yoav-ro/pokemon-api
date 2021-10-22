@@ -7,6 +7,7 @@ const server = express();
 const port = 8080;
 
 server.use(cors());
+server.use(express.json());
 server.use(userHandler);
 server.use('/pokemon', pokemonRouter); //Pokemon router
 

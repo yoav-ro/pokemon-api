@@ -10,7 +10,10 @@ function errorHandler(err, request, response, next) {
       break;
     case errorCodes.usernameHeaderMissing:
       response.status(401).json({ message: 'Username header not found' });
+    case errorCodes.pokemonExists:
+      response.status(403).json({ message: 'Pokemon exists' });
     default:
+      console.log(err);
       response
         .status(500)
         .json({ message: 'An internal server error has occured' });
