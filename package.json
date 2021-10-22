@@ -13,7 +13,8 @@
     "watch": "webpack --watch",
     "serve": "webpack serve",
     "start": "node ./dist/main.js",
-    "dev": "nodemon ./src/index.js"
+    "dev": "nodemon ./src/index.js",
+    "heroku": "npm run build && npm run start"
   },
   "repository": {
     "type": "git",
