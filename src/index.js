@@ -6,7 +6,7 @@ const errorHandler = require('./middleware/errorHandler');
 const userHandler = require('./middleware/userHandler');
 const fileHelper = require('./fileHelper/fileHelpers');
 const server = express();
-const port = 8080;
+const port = process.env.PORT || 3000;
 
 //Create users dir if it does not exist
 fileHelper.createUsersDir();
