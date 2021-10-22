@@ -1,26 +1,31 @@
 const express = require('express');
 const Pokedex = require('pokedex-promise-v2');
+const errorCodes = require('../constants/errorCodes');
 
 const router = express.Router();
 const P = new Pokedex();
 
-router.get('/get/:id', async (request, response) => {
+
+router.get('/get/:id', async (request, response, next) => {
   try {
     const pokemonID = request.params.id;
     const pokemonData = await getPokemonData(pokemonID);
     response.json(pokemonData);
   } catch (error) {
-    console.log(error);
+    console.log("Couldnt get pokemon by id");
+    console.log(errorCodes.pokemonIdNotFound);
+    throwCallbackError(errorCodes.pokemonIdNotFound, next)
   }
 });
 
-router.get('/query', async (request, response) => {
+router.get('/query', async (request, response, next) => {
   try {
     const pokemonName = request.query.query;
     const pokemonData = await getPokemonData(pokemonName);
     response.json(pokemonData);
   } catch (error) {
-    console.log(error);
+    console.log("Couldn't get pokemon by name");
+    throwCallbackError(errorCodes.pokemonNameNotFound, next)
   }
 });
 
@@ -58,6 +63,15 @@ function getAbilities(abilities){
         newAbilities.push(abil.ability.name);
     })
     return newAbilities;
+}
+
+//Throw callback error so it can be caught by express
+function throwCallbackError(error, next){
+    try{
+        throw new Error(error);
+    }catch(err){
+        next(err);
+    }
 }
 
 module.exports = router;
