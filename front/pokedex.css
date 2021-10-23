@@ -1,0 +1,27 @@
+.searched{
+    background-image: url("media/whoIsThat.png");
+    background-repeat: no-repeat;
+}
+
+#pokemonInfo {
+    margin-left: 25%;
+    margin-top: 10%;
+    font-weight: bold;
+    font-size: large;
+    color: black;
+}
+
+#pokemonBlock {
+    text-align: center;
+    margin-top: 4%;
+}
+
+#nameInput{
+    text-align: center;
+    font-weight: bolder;
+}
+
+#image{
+    width: 10%;
+    height: 10%;
+}
